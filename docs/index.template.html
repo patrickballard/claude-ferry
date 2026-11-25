@@ -51,7 +51,7 @@ a{color:var(--accent)}
       <ol>
         <li>Open a chat on claude.ai and click <b>⛴ Ferry</b>.</li>
         <li>In your project folder, run:
-          <pre>npx claude-ferry in</pre></li>
+          <pre>npx github:patrickballard/claude-ferry in</pre></li>
       </ol>
       <p class="hint">Claude Code opens with the whole chat as its history, including the full source of every artifact. Ask it to “build what we discussed”.</p>
     </section>
@@ -59,7 +59,7 @@ a{color:var(--accent)}
       <h3>Code → Chat</h3>
       <ol>
         <li>In the folder where you used Claude Code, run:
-          <pre>npx claude-ferry out</pre></li>
+          <pre>npx github:patrickballard/claude-ferry out</pre></li>
         <li>Pick a session. It's copied as clean markdown, so you can paste it into a new chat.</li>
       </ol>
       <p class="hint">Add <code>--tools</code> to include one-line summaries of tool calls and <code>--last 5</code> to keep only the last five exchanges.</p>
@@ -68,7 +68,7 @@ a{color:var(--accent)}
 
   <h2>Also</h2>
   <ul>
-    <li><b>No bookmarklet?</b> Export your data from claude.ai (Settings → Privacy) and run <code>npx claude-ferry in conversations.json</code> to choose any chat.</li>
+    <li><b>No bookmarklet?</b> Export your data from claude.ai (Settings → Privacy) and run <code>npx github:patrickballard/claude-ferry in conversations.json</code> to choose any chat.</li>
     <li><b>Branches:</b> if you edited or retried messages, only the branch you're currently looking at is copied.</li>
     <li><b>Private:</b> the bookmarklet reads the chat from claude.ai with your own login and copies it to your clipboard. The CLI writes one file to <code>~/.claude/projects</code>. Nothing is sent anywhere else.</li>
   </ul>

@@ -19,7 +19,7 @@ const HELP = `${c.b('claude-ferry')} ${VERSION} — move conversations between C
 
 ${c.b('Chat → Code')}
   1. On a claude.ai chat, click the ⛴ Ferry bookmarklet (${BOOKMARKLET_PAGE})
-  2. In your project folder:   ${c.g('npx claude-ferry in')}
+  2. In your project folder:   ${c.g('npx github:patrickballard/claude-ferry in')}
      → opens Claude Code with the chat as real session history
 
   ferry in [file]          read from clipboard, a file, or newest ~/Downloads/claude-ferry-*.json

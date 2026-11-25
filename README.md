@@ -3,15 +3,15 @@
 Start in Claude Chat and finish in Claude Code, or go the other way.
 
 ```bash
-npx claude-ferry in     # claude.ai chat → new Claude Code session, with the chat as real history
-npx claude-ferry out    # Claude Code session → markdown on your clipboard, ready for claude.ai
+npx github:patrickballard/claude-ferry in     # claude.ai chat → new Claude Code session, with the chat as real history
+npx github:patrickballard/claude-ferry out    # Claude Code session → markdown on your clipboard, ready for claude.ai
 ```
 
 ## Chat → Code
 
 1. <a name="bookmarklet"></a>Add the **⛴ Ferry** bookmarklet: drag the button from the [landing page](https://patrickballard.github.io/claude-ferry/) to your bookmarks bar. If you'd rather not drag, create a bookmark and paste the contents of [`docs/bookmarklet.txt`](docs/bookmarklet.txt) as its URL.
 2. Open a chat on claude.ai and click **⛴ Ferry**. The conversation is copied to your clipboard. If clipboard access is blocked, it's saved as `~/Downloads/claude-ferry-*.json` instead.
-3. In your project folder, run `npx claude-ferry in`.
+3. In your project folder, run `npx github:patrickballard/claude-ferry in`.
 
 Claude Code opens with the conversation as its own history. The chat is written as real session turns, so `/resume`, `/compact` and rewind all work. Ask it to "build what we discussed".
 
@@ -25,11 +25,11 @@ What doesn't: thinking blocks (they can't move between products) and images.
 
 Flags: `--last <n>` keeps only the last n exchanges. `--no-launch` writes the session without starting `claude`.
 
-**No bookmarklet?** Export your data from claude.ai (Settings → Privacy → Export data), then run `npx claude-ferry in conversations.json` and choose a chat.
+**No bookmarklet?** Export your data from claude.ai (Settings → Privacy → Export data), then run `npx github:patrickballard/claude-ferry in conversations.json` and choose a chat.
 
 ## Code → Chat
 
-From the folder you used Claude Code in, run `npx claude-ferry out`. Choose a session and it's copied as clean markdown: your prompts and Claude's replies, with system noise removed. History from before any compaction is recovered. Paste it into a new chat.
+From the folder you used Claude Code in, run `npx github:patrickballard/claude-ferry out`. Choose a session and it's copied as clean markdown: your prompts and Claude's replies, with system noise removed. History from before any compaction is recovered. Paste it into a new chat.
 
 Flags:
 - `--tools` adds one-line summaries of tool calls.

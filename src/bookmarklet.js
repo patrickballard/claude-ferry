@@ -1,6 +1,6 @@
 // ⛴ Ferry bookmarklet: run on a claude.ai chat. Fetches the conversation from
 // claude.ai's own API (same origin, your session) and copies it to the
-// clipboard for `npx claude-ferry in`. Nothing is sent anywhere else.
+// clipboard for `npx github:patrickballard/claude-ferry in`. Nothing is sent anywhere else.
 (async () => {
   const toast = (msg, ok = true) => {
     const el = document.createElement('div');
@@ -44,7 +44,7 @@
       a.remove();
     }
     const n = (conv.chat_messages || []).length;
-    toast(`⛴ "${conv.name || 'Chat'}" (${n} messages) ${copied ? 'copied' : 'downloaded'}.\nNow run in your project:  npx claude-ferry in`);
+    toast(`⛴ "${conv.name || 'Chat'}" (${n} messages) ${copied ? 'copied' : 'downloaded'}.\nNow run in your project:  npx github:patrickballard/claude-ferry in`);
   } catch (e) {
     toast('⛴ Ferry failed: ' + e.message, false);
   }
