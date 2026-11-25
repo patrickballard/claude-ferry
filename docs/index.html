@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>claude-ferry</title>
+<meta name="description" content="Move a conversation from Claude Chat into Claude Code, or back again. One click, one command.">
+<meta property="og:title" content="claude-ferry">
+<meta property="og:description" content="Start in Claude Chat, finish in Claude Code (or vice versa). One click, one command.">
+<style>
+:root{--bg:#f6f4ef;--fg:#1d1b17;--mute:#6b665c;--card:#fffdf8;--line:#e3ddd0;--accent:#1f5f8b;--accent-fg:#fff;--code:#efeadf}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--fg:#ece8df;--mute:#9a958a;--card:#1b1e23;--line:#2c3037;--accent:#5aa9e6;--accent-fg:#0d1116;--code:#23272e}}
+:root[data-theme="dark"]{--bg:#14161a;--fg:#ece8df;--mute:#9a958a;--card:#1b1e23;--line:#2c3037;--accent:#5aa9e6;--accent-fg:#0d1116;--code:#23272e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:56px 16px 80px}
+h1{font-size:clamp(34px,7vw,52px);line-height:1.05;margin:0 0 12px;letter-spacing:-.02em}
+.lede{font-size:19px;color:var(--mute);margin:0 0 36px;max-width:34em}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:44px 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{margin:0 0 10px;font-size:18px}
+ol{margin:0;padding-left:20px}
+li{margin:6px 0}
+code,pre{font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);border-radius:6px}
+code{padding:2px 6px}
+pre{padding:12px 14px;overflow-x:auto;margin:10px 0 0}
+.bm{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:600;font-size:18px;padding:12px 22px;border-radius:999px;cursor:grab;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+.bm:active{cursor:grabbing}
+.drag{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin:0 0 8px}
+.hint{color:var(--mute);font-size:14px}
+.note{color:var(--mute);font-size:14px;margin-top:40px;border-top:1px solid var(--line);padding-top:18px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+  <h1>⛴ claude-ferry</h1>
+  <p class="lede">Start in Claude Chat and finish in Claude Code, or go the other way. Your chat comes across as real session history, not a wall of pasted text.</p>
+
+  <div class="drag">
+    <a class="bm" href="javascript:(async%20()%20%3D%3E%20%7B%0Aconst%20toast%20%3D%20(msg%2C%20ok%20%3D%20true)%20%3D%3E%20%7B%0Aconst%20el%20%3D%20document.createElement('div')%3B%0Ael.textContent%20%3D%20msg%3B%0Ael.style.cssText%20%3D%0A'position%3Afixed%3Bz-index%3A2147483647%3Bleft%3A50%25%3Bbottom%3A24px%3Btransform%3AtranslateX(-50%25)%3Bmax-width%3A90vw%3B'%20%2B%0A'padding%3A12px%2016px%3Bborder-radius%3A10px%3Bfont%3A14px%2F1.4%20ui-sans-serif%2Csystem-ui%2Csans-serif%3Bwhite-space%3Apre-line%3B'%20%2B%0A'box-shadow%3A0%208px%2030px%20rgba(0%2C0%2C0%2C.25)%3Bcolor%3A%23fff%3Bbackground%3A'%20%2B%20(ok%20%3F%20'%231f6f43'%20%3A%20'%239b2c2c')%3B%0Adocument.body.appendChild(el)%3B%0AsetTimeout(()%20%3D%3E%20el.remove()%2C%20ok%20%3F%206000%20%3A%209000)%3B%0A%7D%3B%0Atry%20%7B%0Aif%20(!%2F(%5E%7C%5C.)claude%5C.ai%24%2F.test(location.hostname))%20return%20toast('%E2%9B%B4%20Ferry%3A%20open%20a%20chat%20on%20claude.ai%20first.'%2C%20false)%3B%0Aconst%20id%20%3D%20(location.pathname.match(%2F%5C%2Fchat%5C%2F(%5B0-9a-f-%5D%7B36%7D)%2F)%20%7C%7C%20%5B%5D)%5B1%5D%3B%0Aif%20(!id)%20return%20toast('%E2%9B%B4%20Ferry%3A%20open%20a%20chat%20on%20claude.ai%20first.'%2C%20false)%3B%0Aconst%20q%20%3D%20'%3Ftree%3DTrue%26rendering_mode%3Dmessages%26render_all_tools%3Dtrue'%3B%0Aconst%20cookieOrg%20%3D%20decodeURIComponent((document.cookie.match(%2F(%3F%3A%5E%7C%3B%5Cs*)lastActiveOrg%3D(%5B%5E%3B%5D%2B)%2F)%20%7C%7C%20%5B%5D)%5B1%5D%20%7C%7C%20'')%3B%0Alet%20orgs%20%3D%20cookieOrg%20%3F%20%5BcookieOrg%5D%20%3A%20%5B%5D%3B%0Aif%20(!orgs.length)%20%7B%0Aconst%20r%20%3D%20await%20fetch('%2Fapi%2Forganizations'%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%0Aorgs%20%3D%20r.ok%20%3F%20(await%20r.json()).map((o)%20%3D%3E%20o.uuid)%20%3A%20%5B%5D%3B%0A%7D%0Alet%20conv%20%3D%20null%3B%0Afor%20(const%20org%20of%20orgs)%20%7B%0Aconst%20r%20%3D%20await%20fetch(%60%2Fapi%2Forganizations%2F%24%7Borg%7D%2Fchat_conversations%2F%24%7Bid%7D%24%7Bq%7D%60%2C%20%7B%20credentials%3A%20'include'%20%7D)%3B%0Aif%20(r.ok)%20%7B%20conv%20%3D%20await%20r.json()%3B%20break%3B%20%7D%0A%7D%0Aif%20(!conv)%20return%20toast(%22%E2%9B%B4%20Ferry%3A%20couldn't%20load%20this%20chat%20from%20claude.ai.%22%2C%20false)%3B%0Aconst%20payload%20%3D%20JSON.stringify(%7B%20ferry%3A%201%2C%20source%3A%20'claude.ai'%2C%20url%3A%20location.origin%20%2B%20location.pathname%2C%20conversation%3A%20conv%20%7D)%3B%0Alet%20copied%20%3D%20false%3B%0Atry%20%7B%20await%20navigator.clipboard.writeText(payload)%3B%20copied%20%3D%20true%3B%20%7D%20catch%20(e)%20%7B%7D%0Aif%20(!copied)%20%7B%0Aconst%20a%20%3D%20document.createElement('a')%3B%0Aa.href%20%3D%20URL.createObjectURL(new%20Blob(%5Bpayload%5D%2C%20%7B%20type%3A%20'application%2Fjson'%20%7D))%3B%0Aa.download%20%3D%20%60claude-ferry-%24%7Bid.slice(0%2C%208)%7D.json%60%3B%0Adocument.body.appendChild(a)%3B%0Aa.click()%3B%0Aa.remove()%3B%0A%7D%0Aconst%20n%20%3D%20(conv.chat_messages%20%7C%7C%20%5B%5D).length%3B%0Atoast(%60%E2%9B%B4%20%22%24%7Bconv.name%20%7C%7C%20'Chat'%7D%22%20(%24%7Bn%7D%20messages)%20%24%7Bcopied%20%3F%20'copied'%20%3A%20'downloaded'%7D.%5CnNow%20run%20in%20your%20project%3A%20%20npx%20claude-ferry%20in%60)%3B%0A%7D%20catch%20(e)%20%7B%0Atoast('%E2%9B%B4%20Ferry%20failed%3A%20'%20%2B%20e.message%2C%20false)%3B%0A%7D%0A%7D)()%3B" onclick="alert('Drag this button to your bookmarks bar, then click it while you have a chat open on claude.ai.');return false;">⛴ Ferry</a>
+    <span class="hint">← drag this to your bookmarks bar (on desktop)</span>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Chat → Code</h3>
+      <ol>
+        <li>Open a chat on claude.ai and click <b>⛴ Ferry</b>.</li>
+        <li>In your project folder, run:
+          <pre>npx claude-ferry in</pre></li>
+      </ol>
+      <p class="hint">Claude Code opens with the whole chat as its history, including the full source of every artifact. Ask it to “build what we discussed”.</p>
+    </section>
+    <section class="card">
+      <h3>Code → Chat</h3>
+      <ol>
+        <li>In the folder where you used Claude Code, run:
+          <pre>npx claude-ferry out</pre></li>
+        <li>Pick a session. It's copied as clean markdown, so you can paste it into a new chat.</li>
+      </ol>
+      <p class="hint">Add <code>--tools</code> to include one-line summaries of tool calls and <code>--last 5</code> to keep only the last five exchanges.</p>
+    </section>
+  </div>
+
+  <h2>Also</h2>
+  <ul>
+    <li><b>No bookmarklet?</b> Export your data from claude.ai (Settings → Privacy) and run <code>npx claude-ferry in conversations.json</code> to choose any chat.</li>
+    <li><b>Branches:</b> if you edited or retried messages, only the branch you're currently looking at is copied.</li>
+    <li><b>Private:</b> the bookmarklet reads the chat from claude.ai with your own login and copies it to your clipboard. The CLI writes one file to <code>~/.claude/projects</code>. Nothing is sent anywhere else.</li>
+  </ul>
+
+  <p class="note">Unofficial and not affiliated with Anthropic. It relies on claude.ai's internal API and Claude Code's session file format, and either could change. <a href="https://github.com/patrickballard/claude-ferry">Source on GitHub</a> · MIT</p>
+</main>
+</body>
+</html>

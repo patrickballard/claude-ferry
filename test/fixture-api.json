@@ -1,0 +1,10 @@
+{"ferry":1,"source":"claude.ai","url":"https://claude.ai/chat/11111111-2222-3333-4444-555555555555","conversation":{
+"uuid":"11111111-2222-3333-4444-555555555555","name":"Pricing page for Lantern","model":"claude-opus-5-5",
+"current_leaf_message_uuid":"m4",
+"chat_messages":[
+{"uuid":"m1","parent_message_uuid":"00000000-0000-4000-8000-000000000000","sender":"human","index":0,"created_at":"2026-11-24T10:00:00Z","content":[{"type":"text","text":"I'm building a pricing page for my app Lantern. The codeword for this project is PURPLE-OTTER-42. Three tiers please."}],"attachments":[{"file_name":"notes.txt","extracted_content":"Free tier must allow 3 projects."}],"files":[]},
+{"uuid":"m2","parent_message_uuid":"m1","sender":"assistant","index":1,"created_at":"2026-11-24T10:00:10Z","content":[{"type":"thinking","thinking":"secret"},{"type":"text","text":"Here's a first draft."},{"type":"tool_use","name":"artifacts","input":{"id":"pricing","command":"create","type":"text/html","title":"Lantern pricing","content":"<h1>Lantern</h1><p>Free: 3 projects</p>"}},{"type":"tool_result","name":"artifacts","content":[{"type":"text","text":"OK"}]},{"type":"text","text":"Free, Pro ($9) and Team ($29)."}]},
+{"uuid":"m3x","parent_message_uuid":"m2","sender":"human","index":2,"created_at":"2026-11-24T10:01:00Z","content":[{"type":"text","text":"ABANDONED BRANCH make it blue"}]},
+{"uuid":"m3","parent_message_uuid":"m2","sender":"human","index":2,"created_at":"2026-11-24T10:02:00Z","content":[{"type":"text","text":"Make Pro $12 instead."}]},
+{"uuid":"m4","parent_message_uuid":"m3","sender":"assistant","index":3,"created_at":"2026-11-24T10:02:10Z","content":[{"type":"tool_use","name":"web_search","input":{"query":"saas pricing benchmarks 2026"}},{"type":"tool_result","name":"web_search","content":[{"type":"knowledge","title":"SaaS pricing report","url":"https://example.com/report"}]},{"type":"text","text":"Done — Pro is now $12/month."}]}
+]}}

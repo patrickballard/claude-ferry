@@ -1,0 +1,19 @@
+{
+  "name": "claude-ferry",
+  "version": "0.1.0",
+  "description": "Move conversations between Claude Chat (claude.ai) and Claude Code. Unofficial.",
+  "type": "module",
+  "bin": {
+    "claude-ferry": "bin/ferry.js",
+    "ferry": "bin/ferry.js"
+  },
+  "files": ["bin", "src", "README.md"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build:bookmarklet": "node scripts/build-bookmarklet.js"
+  },
+  "keywords": ["claude", "claude-code", "claude-ai", "export", "import", "session", "cli"],
+  "repository": { "type": "git", "url": "git+https://github.com/patrickballard/claude-ferry.git" },
+  "license": "MIT"
+}
